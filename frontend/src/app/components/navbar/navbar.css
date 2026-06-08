@@ -314,3 +314,30 @@
 .mega-sub-link:hover {
     color: #2874f0;
 }
+
+.admin-item {
+    background: #f5f8ff;
+    color: #2874f0 !important;
+    font-weight: 700 !important;
+    border-left: 3px solid #2874f0;
+}
+
+.admin-item:hover {
+    background: #2874f0 !important;
+    color: white !important;
+}
+
+.admin-nav-btn {
+    background: #ffe500;
+    color: #212121;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.admin-nav-btn:hover {
+    background: #ffd700;
+}

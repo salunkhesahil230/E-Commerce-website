@@ -30,5 +30,5 @@ npm install
 ng serve
 
 ## Default Accounts
-- Admin: admin@shop.com / admin123
+- Admin: admin@gmail.com / admin123
 - Customer: customer@shop.com / customer123

@@ -24,6 +24,14 @@
             <!-- Nav Actions -->
             <div class="navbar-actions">
 
+                <!-- Admin Panel Quick Link -->
+
+                <a routerLink="/admin"
+                    class="admin-nav-btn"
+                    *ngIf="currentUser && currentUser.role === 'admin'">
+                    🛡️ Admin Panel
+                </a>
+
                 <!-- Login / Account -->
                 <div class="nav-item dropdown-wrapper" *ngIf="!currentUser">
                     <a routerLink="/login" class="nav-btn login-btn">
@@ -35,15 +43,41 @@
                 <div class="nav-item dropdown-wrapper" *ngIf="currentUser">
                     <button class="nav-btn account-btn" (click)="toggleDropdown('account')">
                         <span>{{ currentUser.name.split(' ')[0] }}</span>
-                        <small>Account ▾</small>
+                        <small>{{ currentUser.role === 'admin' ? 'Admin ▾' : 'Account ▾' }}</small>
                     </button>
                     <div class="dropdown-menu" *ngIf="activeDropdown === 'account'">
-                        <a routerLink="/profile" class="dropdown-item" (click)="closeDropdown()">My Profile</a>
-                        <a routerLink="/orders" class="dropdown-item" (click)="closeDropdown()">My Orders</a>
-                        <a *ngIf="currentUser.role === 'admin'" routerLink="/admin" class="dropdown-item"
-                            (click)="closeDropdown()">Admin Panel</a>
+
+                        <!-- Admin Links -->
+                        <div *ngIf="currentUser.role === 'admin'">
+                            <a routerLink="/admin" class="dropdown-item admin-item" (click)="closeDropdown()">
+                                🛡️ Admin Panel
+                            </a>
+                            <a routerLink="/admin/products" class="dropdown-item" (click)="closeDropdown()">
+                                📦 Manage Products
+                            </a>
+                            <a routerLink="/admin/customers" class="dropdown-item" (click)="closeDropdown()">
+                                👥 Manage Customers
+                            </a>
+                            <a routerLink="/admin/orders" class="dropdown-item" (click)="closeDropdown()">
+                                🧾 View Orders
+                            </a>
+                        </div>
+
+                        <!-- Customer Links -->
+                        <div *ngIf="currentUser.role !== 'admin'">
+                            <a routerLink="/profile" class="dropdown-item" (click)="closeDropdown()">
+                                👤 My Profile
+                            </a>
+                            <a routerLink="/orders" class="dropdown-item" (click)="closeDropdown()">
+                                📦 My Orders
+                            </a>
+                        </div>
+
                         <hr class="dropdown-divider" />
-                        <button class="dropdown-item logout-item" (click)="logout()">Logout</button>
+                        <button class="dropdown-item logout-item" (click)="logout()">
+                            🚪 Logout
+                        </button>
+
                     </div>
                 </div>
 
