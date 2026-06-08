@@ -1,0 +1,129 @@
+<div class="admin-page">
+  <div class="page-header">
+    <div>
+      <h1>Manage Products</h1>
+      <p>{{ total }} products total</p>
+    </div>
+    <button class="add-btn" (click)="openAddForm()">+ Add Product</button>
+  </div>
+
+  <!-- Add/Edit Form -->
+  <div class="form-overlay" *ngIf="showForm">
+    <div class="form-modal">
+      <div class="modal-header">
+        <h2>{{ editingProduct ? 'Edit Product' : 'Add New Product' }}</h2>
+        <button class="close-btn" (click)="showForm = false">✕</button>
+      </div>
+
+      <div class="success-box" *ngIf="formSuccess">{{ formSuccess }}</div>
+      <div class="error-box" *ngIf="formError">{{ formError }}</div>
+
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>Product Name *</label>
+          <input type="text" [(ngModel)]="name" class="form-input" placeholder="Enter product name" />
+        </div>
+
+        <div class="form-group full">
+          <label>Description</label>
+          <textarea [(ngModel)]="description" class="form-input" rows="3" placeholder="Enter description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Price (₹) *</label>
+          <input type="number" [(ngModel)]="price" class="form-input" placeholder="0" />
+        </div>
+
+        <div class="form-group">
+          <label>Stock Quantity *</label>
+          <input type="number" [(ngModel)]="stock" class="form-input" placeholder="0" />
+        </div>
+
+        <div class="form-group">
+          <label>Type *</label>
+          <select [(ngModel)]="selectedTypeId" class="form-input" (change)="onTypeChange()">
+            <option value="">Select Type</option>
+            <option *ngFor="let type of types" [value]="type.id">{{ type.name }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Category *</label>
+          <select [(ngModel)]="selectedCategoryId" class="form-input" (change)="onCategoryChange()">
+            <option value="">Select Category</option>
+            <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label>Sub Category *</label>
+          <select [(ngModel)]="subCategoryId" class="form-input">
+            <option value="">Select Sub Category</option>
+            <option *ngFor="let sub of subCategories" [value]="sub.id">{{ sub.name }}</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label>Product Image</label>
+          <input type="file" (change)="onFileChange($event)" accept="image/*" class="form-input" />
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="cancel-btn" (click)="showForm = false">Cancel</button>
+        <button class="save-btn" (click)="saveProduct()" [disabled]="formLoading">
+          {{ formLoading ? 'Saving...' : 'Save Product' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Table -->
+  <div class="table-wrap">
+    <div class="loading-wrap" *ngIf="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <table class="data-table" *ngIf="!loading">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>
+            <img [src]="getImageUrl(product.imagePath)" class="table-img"
+              (error)="$any($event.target).src='/placeholder.png'" />
+          </td>
+          <td>{{ product.name }}</td>
+          <td>
+            {{ product.subCategory?.category?.type?.name }} ›
+            {{ product.subCategory?.name }}
+          </td>
+          <td>₹{{ product.price | number }}</td>
+          <td>
+            <span [class]="product.stock > 0 ? 'in-stock' : 'out-stock'">
+              {{ product.stock }}
+            </span>
+          </td>
+          <td class="actions">
+            <button class="edit-btn" (click)="openEditForm(product)">Edit</button>
+            <button class="delete-btn" (click)="deleteProduct(product.id, product.name)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button class="page-btn" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">‹</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="page-btn" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">›</button>
+    </div>
+  </div>
+</div>

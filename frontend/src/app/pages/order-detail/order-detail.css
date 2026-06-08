@@ -1,0 +1,243 @@
+.loading-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 80px 0;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #f0f0f0;
+    border-top-color: #2874f0;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.detail-page {
+    background: #f1f3f6;
+    min-height: 100vh;
+    padding: 24px 0;
+}
+
+.detail-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* ─── Success Banner ─────────────────────────────────────────────── */
+.success-banner {
+    background: #388e3c;
+    color: white;
+    border-radius: 4px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.success-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.success-banner h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.success-banner p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* ─── Grid Layout ────────────────────────────────────────────────── */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 16px;
+    align-items: start;
+}
+
+/* ─── Section Card ───────────────────────────────────────────────── */
+.section-card {
+    background: white;
+    border-radius: 4px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* ─── Order Items ────────────────────────────────────────────────── */
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.item-image {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #212121;
+    margin-bottom: 4px;
+}
+
+.item-qty {
+    font-size: 13px;
+    color: #878787;
+    margin-bottom: 2px;
+}
+
+.item-price-label {
+    font-size: 13px;
+    color: #878787;
+}
+
+.item-subtotal {
+    font-size: 16px;
+    font-weight: 700;
+    color: #212121;
+}
+
+/* ─── Info Rows ──────────────────────────────────────────────────── */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #878787;
+}
+
+.info-value {
+    font-size: 14px;
+    color: #212121;
+    font-weight: 500;
+}
+
+.order-status {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-confirmed {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.status-delivered {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-cancelled {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.info-divider {
+    border: none;
+    border-top: 2px dashed #f0f0f0;
+    margin: 8px 0;
+}
+
+.total-row {
+    padding-top: 12px;
+}
+
+.total-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #212121;
+}
+
+/* ─── Action Buttons ─────────────────────────────────────────────── */
+.action-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-orders {
+    width: 100%;
+    padding: 12px;
+    background: #2874f0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btn-orders:hover {
+    background: #1a65d6;
+}
+
+.btn-home {
+    width: 100%;
+    padding: 12px;
+    background: white;
+    color: #2874f0;
+    border: 2px solid #2874f0;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.btn-home:hover {
+    background: #2874f0;
+    color: white;
+}

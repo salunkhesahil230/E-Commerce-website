@@ -1,0 +1,93 @@
+<nav class="navbar">
+    <!-- Top Bar -->
+    <div class="navbar-top">
+        <div class="navbar-container">
+
+            <!-- Logo -->
+            <a routerLink="/" class="navbar-logo">
+                <span class="logo-text">ShopZone</span>
+                <span class="logo-tagline">Explore <em>Plus</em></span>
+            </a>
+
+            <!-- Search Bar -->
+            <div class="navbar-search">
+                <input type="text" [(ngModel)]="searchKeyword" (keydown)="onSearchKeydown($event)"
+                    placeholder="Search for products, brands and more" class="search-input" />
+                <button class="search-btn" (click)="search()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="white" stroke-width="2"
+                            fill="none" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Nav Actions -->
+            <div class="navbar-actions">
+
+                <!-- Login / Account -->
+                <div class="nav-item dropdown-wrapper" *ngIf="!currentUser">
+                    <a routerLink="/login" class="nav-btn login-btn">
+                        <span>Login</span>
+                        <small>or Register</small>
+                    </a>
+                </div>
+
+                <div class="nav-item dropdown-wrapper" *ngIf="currentUser">
+                    <button class="nav-btn account-btn" (click)="toggleDropdown('account')">
+                        <span>{{ currentUser.name.split(' ')[0] }}</span>
+                        <small>Account ▾</small>
+                    </button>
+                    <div class="dropdown-menu" *ngIf="activeDropdown === 'account'">
+                        <a routerLink="/profile" class="dropdown-item" (click)="closeDropdown()">My Profile</a>
+                        <a routerLink="/orders" class="dropdown-item" (click)="closeDropdown()">My Orders</a>
+                        <a *ngIf="currentUser.role === 'admin'" routerLink="/admin" class="dropdown-item"
+                            (click)="closeDropdown()">Admin Panel</a>
+                        <hr class="dropdown-divider" />
+                        <button class="dropdown-item logout-item" (click)="logout()">Logout</button>
+                    </div>
+                </div>
+
+                <!-- Cart -->
+                <a routerLink="/cart" class="nav-item cart-btn" *ngIf="currentUser && currentUser.role !== 'admin'">
+                    <div class="cart-icon-wrap">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+                            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.4 5H19" stroke="white" stroke-width="2"
+                                fill="none" stroke-linecap="round" />
+                        </svg>
+                        <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+                    </div>
+                    <span>Cart</span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Bar -->
+    <div class="navbar-bottom">
+        <div class="navbar-container">
+            <div class="category-nav">
+                <div class="category-item" *ngFor="let type of taxonomyTree" (mouseenter)="toggleDropdown(type.name)"
+                    (mouseleave)="closeDropdown()">
+                    <span class="category-label" (click)="browseType(type.id)">{{ type.name }}</span>
+                    <div class="mega-menu" *ngIf="activeDropdown === type.name">
+                        <div class="mega-menu-inner">
+                            <div class="mega-column" *ngFor="let category of type.categories">
+                                <h4 class="mega-category-title" (click)="browseCategory(category.id)">
+                                    {{ category.name }}
+                                </h4>
+                                <ul>
+                                    <li *ngFor="let sub of category.subCategories">
+                                        <a (click)="browseSubCategory(sub.id)" class="mega-sub-link">
+                                            {{ sub.name }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

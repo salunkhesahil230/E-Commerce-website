@@ -1,0 +1,88 @@
+<!-- Loading -->
+<div class="loading-wrap" *ngIf="loading">
+    <div class="spinner"></div>
+</div>
+
+<!-- Order Detail -->
+<div class="detail-page" *ngIf="!loading && order">
+    <div class="detail-container">
+
+        <!-- Success Banner -->
+        <div class="success-banner">
+            <span class="success-icon">✓</span>
+            <div>
+                <h2>Order Confirmed!</h2>
+                <p>Your order #{{ order.id }} has been placed successfully.</p>
+            </div>
+        </div>
+
+        <div class="detail-grid">
+
+            <!-- Left — Items -->
+            <div class="detail-left">
+                <div class="section-card">
+                    <h3 class="section-title">Order Items</h3>
+                    <div class="order-item" *ngFor="let item of order.items">
+                        <img [src]="getImageUrl(item.product)" [alt]="item.product?.name" class="item-image"
+                            (error)="$any($event.target).src='/placeholder.png'" />
+                        <div class="item-info">
+                            <h4 class="item-name">{{ item.product?.name }}</h4>
+                            <p class="item-qty">Quantity: {{ item.quantity }}</p>
+                            <p class="item-price-label">
+                                Price at purchase: ₹{{ item.priceAtPurchase | number }}
+                            </p>
+                        </div>
+                        <div class="item-subtotal">
+                            ₹{{ item.priceAtPurchase * item.quantity | number }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right — Summary -->
+            <div class="detail-right">
+
+                <!-- Order Info -->
+                <div class="section-card">
+                    <h3 class="section-title">Order Summary</h3>
+                    <div class="info-row">
+                        <span class="info-label">Order ID</span>
+                        <span class="info-value">#{{ order.id }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Date</span>
+                        <span class="info-value">
+                            {{ order.createdAt | date:'dd MMM yyyy, hh:mm a' }}
+                        </span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Status</span>
+                        <span class="order-status" [ngClass]="getStatusClass(order.status)">
+                            {{ order.status | titlecase }}
+                        </span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Payment</span>
+                        <span class="info-value">{{ order.paymentMethod }}</span>
+                    </div>
+                    <div class="info-divider"></div>
+                    <div class="info-row total-row">
+                        <span class="info-label">Total Amount</span>
+                        <span class="total-value">₹{{ order.totalAmount | number }}</span>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="action-btns">
+                    <button class="btn-orders" (click)="goToOrders()">
+                        View All Orders
+                    </button>
+                    <button class="btn-home" (click)="goToHome()">
+                        Continue Shopping
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

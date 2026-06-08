@@ -1,0 +1,113 @@
+<div class="search-page">
+    <div class="search-container">
+
+        <!-- Filters Sidebar -->
+        <div class="filters-sidebar">
+            <div class="filters-header">
+                <h3>Filters</h3>
+                <button class="clear-btn" (click)="clearFilters()">Clear All</button>
+            </div>
+
+            <!-- Search -->
+            <div class="filter-section">
+                <h4>Search</h4>
+                <input type="text" [(ngModel)]="keyword" placeholder="Search products..." class="filter-input"
+                    (keydown.enter)="applyFilters()" />
+            </div>
+
+            <!-- Type -->
+            <div class="filter-section">
+                <h4>Type</h4>
+                <select [(ngModel)]="typeId" class="filter-select" (change)="onTypeChange()">
+                    <option value="">All Types</option>
+                    <option *ngFor="let type of types" [value]="type.id">
+                        {{ type.name }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Category -->
+            <div class="filter-section" *ngIf="categories.length > 0">
+                <h4>Category</h4>
+                <select [(ngModel)]="categoryId" class="filter-select" (change)="onCategoryChange()">
+                    <option value="">All Categories</option>
+                    <option *ngFor="let cat of categories" [value]="cat.id">
+                        {{ cat.name }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- SubCategory -->
+            <div class="filter-section" *ngIf="subCategories.length > 0">
+                <h4>Sub Category</h4>
+                <select [(ngModel)]="subCategoryId" class="filter-select">
+                    <option value="">All Sub Categories</option>
+                    <option *ngFor="let sub of subCategories" [value]="sub.id">
+                        {{ sub.name }}
+                    </option>
+                </select>
+            </div>
+
+            <!-- Price Range -->
+            <div class="filter-section">
+                <h4>Price Range</h4>
+                <div class="price-inputs">
+                    <input type="number" [(ngModel)]="minPrice" placeholder="Min ₹" class="filter-input price-input" />
+                    <span>—</span>
+                    <input type="number" [(ngModel)]="maxPrice" placeholder="Max ₹" class="filter-input price-input" />
+                </div>
+            </div>
+
+            <!-- In Stock -->
+            <div class="filter-section">
+                <label class="checkbox-label">
+                    <input type="checkbox" [(ngModel)]="inStock" />
+                    <span>In Stock Only</span>
+                </label>
+            </div>
+
+            <button class="apply-btn" (click)="applyFilters()">Apply Filters</button>
+        </div>
+
+        <!-- Results -->
+        <div class="results-area">
+
+            <div class="results-header">
+                <h2 *ngIf="keyword">Results for "{{ keyword }}"</h2>
+                <h2 *ngIf="!keyword">All Products</h2>
+                <span class="results-count">{{ total }} products found</span>
+            </div>
+
+            <!-- Loading -->
+            <div class="loading-wrap" *ngIf="loading">
+                <div class="spinner"></div>
+            </div>
+
+            <!-- No Results -->
+            <div class="no-results" *ngIf="!loading && products.length === 0">
+                <div class="no-results-icon">🔍</div>
+                <h3>No products found</h3>
+                <p>Try different keywords or remove filters</p>
+                <button class="clear-btn-lg" (click)="clearFilters()">Clear Filters</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" *ngIf="!loading && products.length > 0">
+                <app-product-card *ngFor="let product of products" [product]="product">
+                </app-product-card>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" *ngIf="totalPages > 1">
+                <button class="page-btn" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+                    ‹ Prev
+                </button>
+                <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+                <button class="page-btn" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+                    Next ›
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>

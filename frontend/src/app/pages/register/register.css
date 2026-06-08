@@ -1,0 +1,126 @@
+.auth-page {
+    min-height: 100vh;
+    background: #f1f3f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.auth-container {
+    display: flex;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+}
+
+.auth-left {
+    background: #2874f0;
+    padding: 48px 32px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-brand {
+    color: white;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.auth-tagline {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.auth-right {
+    padding: 48px 40px;
+    flex: 1;
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 24px;
+}
+
+.error-box {
+    background: #fff3f3;
+    border: 1px solid #ffcdd2;
+    color: #e53935;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.success-box {
+    background: #f1f8f1;
+    border: 1px solid #c8e6c9;
+    color: #388e3c;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border-color: #2874f0;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    background: #fb641b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-bottom: 16px;
+}
+
+.auth-btn:hover:not(:disabled) {
+    background: #e85d18;
+}
+
+.auth-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.auth-switch {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+}
+
+.auth-switch a {
+    color: #2874f0;
+    font-weight: 600;
+    text-decoration: none;
+}

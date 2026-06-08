@@ -1,0 +1,96 @@
+<!-- Loading -->
+<div class="loading-wrap" *ngIf="loading">
+  <div class="spinner"></div>
+</div>
+
+<!-- Product Detail -->
+<div class="detail-page" *ngIf="!loading && product">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="breadcrumb-container">
+      <span class="breadcrumb-item" (click)="goBack()">← Back</span>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-item">{{ product.subCategory?.category?.type?.name }}</span>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-item">{{ product.subCategory?.category?.name }}</span>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-item">{{ product.subCategory?.name }}</span>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-current">{{ product.name }}</span>
+    </div>
+  </div>
+
+  <div class="detail-container">
+
+    <!-- Left — Image -->
+    <div class="detail-left">
+      <div class="image-wrap">
+        <img [src]="imageUrl" [alt]="product.name" class="product-image"
+          (error)="$any($event.target).src='/placeholder.png'" />
+      </div>
+      <div class="action-buttons">
+        <button class="btn-cart" (click)="addToCart()" [disabled]="adding || product.stock === 0" *ngIf="isCustomer">
+          {{ adding ? 'Adding...' : added ? 'Added to Cart' : 'Add to Cart' }}
+        </button>
+        <button class="btn-login" (click)="goToLogin()" *ngIf="!isLoggedIn">
+          Login to Buy
+        </button>
+        <button class="btn-share" (click)="shareProduct()"> Share </button>
+      </div>
+      <div class="success-msg" *ngIf="successMsg">{{ successMsg }}</div>
+      <div class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</div>
+    </div>
+
+    <!-- Right — Info -->
+    <div class="detail-right">
+      <h1 class="product-name">{{ product.name }}</h1>
+
+      <div class="product-rating">
+        <span class="stars">★★★★☆</span>
+        <span class="rating-count">4.0 (124 ratings)</span>
+      </div>
+
+      <div class="price-section">
+        <span class="current-price">₹{{ product.price | number }}</span>
+        <span class="original-price">₹{{ product.price * 1.15 | number:'1.0-0' }}</span>
+        <span class="discount-label">15% off</span>
+      </div>
+
+      <div class="offers-box">
+        <h4>Available Offers</h4>
+        <ul>
+          <li>10% off on first order</li>
+          <li>5% cashback on credit card</li>
+          <li>Free delivery on orders above ₹500</li>
+        </ul>
+      </div>
+
+      <div class="product-meta">
+        <div class="meta-row">
+          <span class="meta-label">Category</span>
+          <span class="meta-value">{{ product.subCategory?.category?.type?.name }}</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Sub Category</span>
+          <span class="meta-value">{{ product.subCategory?.name }}</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Availability</span>
+          <span class="meta-value stock-in" *ngIf="product.stock > 0">
+            ✓ In Stock ({{ product.stock }} available)
+          </span>
+          <span class="meta-value stock-out" *ngIf="product.stock === 0">
+            ✗ Out of Stock
+          </span>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <h3>Product Description</h3>
+        <p>{{ product.description }}</p>
+      </div>
+
+    </div>
+  </div>
+</div>

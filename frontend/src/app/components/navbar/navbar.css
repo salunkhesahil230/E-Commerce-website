@@ -1,0 +1,316 @@
+/* ─── Navbar Top ─────────────────────────────────────────────────── */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-top {
+    background: #2874f0;
+    padding: 10px 0;
+}
+
+.navbar-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* ─── Logo ───────────────────────────────────────────────────────── */
+.navbar-logo {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+}
+
+.logo-text {
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.logo-tagline {
+    color: #ffe500;
+    font-size: 11px;
+    font-style: italic;
+}
+
+.logo-tagline em {
+    font-style: italic;
+    color: #ffe500;
+}
+
+/* ─── Search ─────────────────────────────────────────────────────── */
+.navbar-search {
+    flex: 1;
+    display: flex;
+    max-width: 600px;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+}
+
+.search-btn {
+    background: #ffe500;
+    border: none;
+    padding: 0 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn svg path {
+    stroke: #2874f0;
+}
+
+/* ─── Actions ────────────────────────────────────────────────────── */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 2px;
+    text-decoration: none;
+    min-width: 80px;
+    transition: background 0.15s;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-btn span {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.nav-btn small {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 11px;
+}
+
+.login-btn {
+    background: white;
+    color: #2874f0 !important;
+    border-radius: 2px;
+}
+
+.login-btn span,
+.login-btn small {
+    color: #2874f0 !important;
+}
+
+.login-btn:hover {
+    background: #f5f5f5 !important;
+}
+
+/* ─── Cart ───────────────────────────────────────────────────────── */
+.cart-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 4px 12px;
+    border-radius: 2px;
+    transition: background 0.15s;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cart-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.cart-icon-wrap {
+    position: relative;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff6161;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ─── Dropdown ───────────────────────────────────────────────────── */
+.dropdown-wrapper {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    min-width: 180px;
+    z-index: 1001;
+    overflow: hidden;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.dropdown-item:hover {
+    background: #f5f5f5;
+    color: #2874f0;
+}
+
+.dropdown-divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 4px 0;
+}
+
+.logout-item {
+    color: #e74c3c !important;
+}
+
+/* ─── Category Bar ───────────────────────────────────────────────── */
+.navbar-bottom {
+    background: #1a65d6;
+    padding: 0;
+}
+
+.category-nav {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.category-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.category-item {
+    position: relative;
+}
+
+.category-label {
+    display: block;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+}
+
+.category-label:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Mega Menu ──────────────────────────────────────────────────── */
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 1001;
+    min-width: 400px;
+    border-radius: 0 0 4px 4px;
+}
+
+.mega-menu-inner {
+    display: flex;
+    padding: 16px;
+    gap: 24px;
+}
+
+.mega-column {
+    min-width: 140px;
+}
+
+.mega-category-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2874f0;
+    margin-bottom: 8px;
+    cursor: pointer;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #eee;
+}
+
+.mega-category-title:hover {
+    text-decoration: underline;
+}
+
+.mega-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-column ul li {
+    margin-bottom: 4px;
+}
+
+.mega-sub-link {
+    font-size: 13px;
+    color: #555;
+    cursor: pointer;
+    display: block;
+    padding: 3px 0;
+    transition: color 0.15s;
+}
+
+.mega-sub-link:hover {
+    color: #2874f0;
+}

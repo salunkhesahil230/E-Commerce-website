@@ -1,0 +1,51 @@
+<div class="admin-page">
+  <div class="admin-header">
+    <h1>Admin Dashboard</h1>
+    <p>Welcome to ShopZone Admin Panel</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card blue">
+      <div class="stat-icon">📦</div>
+      <div class="stat-info">
+        <h3>{{ totalProducts }}</h3>
+        <p>Total Products</p>
+      </div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-icon">👥</div>
+      <div class="stat-info">
+        <h3>{{ totalCustomers }}</h3>
+        <p>Total Customers</p>
+      </div>
+    </div>
+    <div class="stat-card orange">
+      <div class="stat-icon">🧾</div>
+      <div class="stat-info">
+        <h3>{{ totalOrders }}</h3>
+        <p>Total Orders</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-links">
+    <h2>Quick Actions</h2>
+    <div class="links-grid">
+      <a routerLink="/admin/products" class="quick-card">
+        <span class="quick-icon">📦</span>
+        <span class="quick-title">Manage Products</span>
+        <span class="quick-desc">Add, edit, delete products</span>
+      </a>
+      <a routerLink="/admin/customers" class="quick-card">
+        <span class="quick-icon">👥</span>
+        <span class="quick-title">Manage Customers</span>
+        <span class="quick-desc">View and lock customer accounts</span>
+      </a>
+      <a routerLink="/admin/orders" class="quick-card">
+        <span class="quick-icon">🧾</span>
+        <span class="quick-title">View Orders</span>
+        <span class="quick-desc">View all customer orders</span>
+      </a>
+    </div>
+  </div>
+</div>

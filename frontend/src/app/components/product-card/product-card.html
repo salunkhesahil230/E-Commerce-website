@@ -1,0 +1,46 @@
+<div class="product-card" (click)="goToProduct()">
+    <!-- Image -->
+    <div class="card-image-wrap">
+        <img [src]="imageUrl" [alt]="product.name" class="card-image"
+            (error)="$any($event.target).src='/placeholder.png'" />
+        <span class="discount-badge">{{ discount }}% off</span>
+        <span class="out-of-stock-badge" *ngIf="product.stock === 0">Out of Stock</span>
+    </div>
+
+    <!-- Info -->
+    <div class="card-body">
+        <h3 class="card-title">{{ product.name }}</h3>
+
+        <div class="card-taxonomy" *ngIf="product.subCategory">
+            <span>{{ product.subCategory?.category?.type?.name }}</span>
+            <span> › </span>
+            <span>{{ product.subCategory?.name }}</span>
+        </div>
+
+        <div class="card-pricing">
+            <span class="card-price">₹{{ product.price | number }}</span>
+            <span class="card-original">₹{{ discountedPrice + (product.price - discountedPrice) * 2 | number }}</span>
+            <span class="card-discount">{{ discount }}% off</span>
+        </div>
+
+        <div class="card-rating">
+            <span class="stars">★★★★☆</span>
+            <span class="rating-count">(124)</span>
+        </div>
+
+        <div class="card-footer">
+            <button class="add-cart-btn" [class.added]="added" [disabled]="adding || product.stock === 0"
+                (click)="addToCart($event)" *ngIf="isCustomer">
+                <span *ngIf="!adding && !added">🛒 Add to Cart</span>
+                <span *ngIf="adding">Adding...</span>
+                <span *ngIf="added">✓ Added!</span>
+            </button>
+
+            <button class="add-cart-btn login-to-add" (click)="goToLogin($event)" *ngIf="!isLoggedIn">
+                Login to Buy
+            </button>
+
+            <span class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="auth-page">
+    <div class="auth-container">
+
+        <div class="auth-left">
+            <h1 class="auth-brand">ShopZone</h1>
+            <p class="auth-tagline">Login to get access to the Best Deals, Offers, and More!</p>
+        </div>
+
+        <div class="auth-right">
+            <h2 class="form-title">Login</h2>
+
+            <div class="error-box" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+            <div class="form-group">
+                <input type="email" [(ngModel)]="email" placeholder="Enter Email" class="form-input" />
+            </div>
+
+            <div class="form-group">
+                <input type="password" [(ngModel)]="password" placeholder="Enter Password" class="form-input"
+                    (keydown.enter)="login()" />
+            </div>
+
+            <p class="forgot-link">
+                <a routerLink="/forgot-password">Forgot Password?</a>
+            </p>
+
+            <button class="auth-btn" (click)="login()" [disabled]="loading">
+                {{ loading ? 'Logging in...' : 'Login' }}
+            </button>
+
+            <p class="auth-switch">
+                New to ShopZone?
+                <a routerLink="/register">Create Account</a>
+            </p>
+        </div>
+
+    </div>
+</div>

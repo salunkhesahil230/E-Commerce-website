@@ -1,0 +1,97 @@
+<!-- Hero Banner -->
+<div class="hero-banner" [style.background]="banners[currentBanner].bg">
+    <div class="hero-content">
+        <h1 class="hero-title" [style.color]="banners[currentBanner].accent">
+            {{ banners[currentBanner].title }}
+        </h1>
+        <p class="hero-subtitle">{{ banners[currentBanner].subtitle }}</p>
+        <button class="hero-btn" (click)="browseType(taxonomyTree[currentBanner]?.id)">
+            Shop Now
+        </button>
+    </div>
+    <div class="banner-dots">
+        <span *ngFor="let b of banners; let i = index" class="dot" [class.active]="i === currentBanner"
+            (click)="currentBanner = i">
+        </span>
+    </div>
+</div>
+
+<!-- Category Shortcuts -->
+<div class="section-wrapper">
+    <div class="section-container">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card" *ngFor="let type of taxonomyTree" (click)="browseType(type.id)">
+                <div class="category-icon">
+                    <span *ngIf="type.name === 'Electronics'">💻</span>
+                    <span *ngIf="type.name === 'Stationery'">📚</span>
+                    <span *ngIf="type.name === 'Furniture'">🪑</span>
+                    <span *ngIf="type.name === 'Clothing'">👕</span>
+                    <span
+                        *ngIf="type.name !== 'Electronics' && type.name !== 'Stationery' && type.name !== 'Furniture' && type.name !== 'Clothing'">🛍️</span>
+                </div>
+                <span class="category-name">{{ type.name }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Products -->
+<div class="section-wrapper grey-bg">
+    <div class="section-container">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="featured-grid" *ngIf="!loading">
+            <app-product-card *ngFor="let product of featuredProducts" [product]="product">
+            </app-product-card>
+        </div>
+    </div>
+</div>
+
+<!-- Sub Category Quick Links -->
+<div class="section-wrapper" *ngFor="let type of taxonomyTree">
+    <div class="section-container">
+        <h2 class="section-title">{{ type.name }}</h2>
+        <div class="subcategory-scroll">
+            <div *ngFor="let cat of type.categories" class="sub-category-group">
+                <h4 class="sub-group-title">{{ cat.name }}</h4>
+                <div class="sub-chips">
+                    <span *ngFor="let sub of cat.subCategories" class="sub-chip" (click)="browseSubCategory(sub.id)">
+                        {{ sub.name }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- All Products -->
+<div class="section-wrapper grey-bg">
+    <div class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">All Products</h2>
+            <span class="total-count">{{ total }} products</span>
+        </div>
+
+        <!-- Loading -->
+        <div class="loading-grid" *ngIf="loading">
+            <div class="skeleton-card" *ngFor="let i of [1,2,3,4,5,6,7,8]"></div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" *ngIf="!loading">
+            <app-product-card *ngFor="let product of products" [product]="product">
+            </app-product-card>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" *ngIf="totalPages > 1">
+            <button class="page-btn" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">
+                ‹ Prev
+            </button>
+            <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+            <button class="page-btn" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+                Next ›
+            </button>
+        </div>
+    </div>
+</div>

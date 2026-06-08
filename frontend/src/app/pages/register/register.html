@@ -1,0 +1,40 @@
+<div class="auth-page">
+    <div class="auth-container">
+
+        <div class="auth-left">
+            <h1 class="auth-brand">ShopZone</h1>
+            <p class="auth-tagline">Create an account and start shopping the best deals today!</p>
+        </div>
+
+        <div class="auth-right">
+            <h2 class="form-title">Create Account</h2>
+
+            <div class="error-box" *ngIf="errorMsg">{{ errorMsg }}</div>
+            <div class="success-box" *ngIf="successMsg">{{ successMsg }}</div>
+
+            <div class="form-group">
+                <input type="text" [(ngModel)]="name" placeholder="Full Name" class="form-input" />
+            </div>
+            <div class="form-group">
+                <input type="email" [(ngModel)]="email" placeholder="Email Address" class="form-input" />
+            </div>
+            <div class="form-group">
+                <input type="password" [(ngModel)]="password" placeholder="Password (min 6 characters)"
+                    class="form-input" />
+            </div>
+            <div class="form-group">
+                <input type="password" [(ngModel)]="confirmPassword" placeholder="Confirm Password" class="form-input"
+                    (keydown.enter)="register()" />
+            </div>
+
+            <button class="auth-btn" (click)="register()" [disabled]="loading">
+                {{ loading ? 'Creating Account...' : 'Create Account' }}
+            </button>
+
+            <p class="auth-switch">
+                Already have an account? <a routerLink="/login">Login</a>
+            </p>
+        </div>
+
+    </div>
+</div>

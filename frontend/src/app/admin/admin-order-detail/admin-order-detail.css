@@ -1,0 +1,140 @@
+.admin-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 16px;
+}
+
+.loading-wrap {
+    display: flex;
+    justify-content: center;
+    padding: 60px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f0f0f0;
+    border-top-color: #2874f0;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.page-header {
+    margin-bottom: 24px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #2874f0;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 600;
+}
+
+.page-header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #212121;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 16px;
+    align-items: start;
+}
+
+.section-card {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.section-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #212121;
+    margin-bottom: 4px;
+}
+
+.item-meta {
+    font-size: 13px;
+    color: #878787;
+}
+
+.item-total {
+    font-size: 15px;
+    font-weight: 700;
+    color: #212121;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f9f9f9;
+    font-size: 14px;
+}
+
+.info-row span:first-child {
+    color: #878787;
+}
+
+.info-row span:last-child {
+    font-weight: 500;
+    color: #212121;
+}
+
+.info-row.total span:last-child {
+    font-size: 20px;
+    font-weight: 800;
+    color: #212121;
+}
+
+.status-badge {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}

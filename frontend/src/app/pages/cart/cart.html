@@ -1,0 +1,116 @@
+<div class="cart-page">
+    <div class="cart-container">
+
+        <!-- Loading -->
+        <div class="loading-wrap" *ngIf="loading">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Empty Cart -->
+        <div class="empty-cart" *ngIf="!loading && cartItems.length === 0">
+            <div class="empty-icon">🛒</div>
+            <h2>Your cart is empty!</h2>
+            <p>Add items to it now.</p>
+            <button class="shop-btn" (click)="goToHome()">
+                Shop Now
+            </button>
+        </div>
+
+        <!-- Cart Content -->
+        <div class="cart-content" *ngIf="!loading && cartItems.length > 0">
+
+            <!-- Left — Items -->
+            <div class="cart-left">
+                <div class="cart-header">
+                    <h2>My Cart ({{ totalItems }} items)</h2>
+                </div>
+
+                <div class="error-box" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+                <!-- Cart Items -->
+                <div class="cart-item" *ngFor="let item of cartItems">
+                    <img [src]="getImageUrl(item.product)" [alt]="item.product.name" class="item-image"
+                        (error)="$any($event.target).src='/placeholder.png'" />
+                    <div class="item-info">
+                        <h3 class="item-name">{{ item.product.name }}</h3>
+                        <p class="item-category">{{ item.product.subCategory?.name }}</p>
+                        <div class="item-price">
+                            ₹{{ item.product.price | number }}
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <div class="quantity-control">
+                            <button class="qty-btn" (click)="updateQuantity(item.id, item.quantity - 1)"
+                                [disabled]="item.quantity <= 1">
+                                −
+                            </button>
+                            <span class="qty-value">{{ item.quantity }}</span>
+                            <button class="qty-btn" (click)="updateQuantity(item.id, item.quantity + 1)">
+                                +
+                            </button>
+                        </div>
+                        <button class="remove-btn" (click)="removeItem(item.id)">
+                            Remove
+                        </button>
+                    </div>
+                    <div class="item-total">
+                        ₹{{ item.product.price * item.quantity | number }}
+                    </div>
+                </div>
+
+                <!-- Checkout Section -->
+                <div class="checkout-section" *ngIf="showCheckout">
+                    <h3>Select Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-option" *ngFor="let method of paymentMethods"
+                            [class.selected]="selectedPayment === method" (click)="selectedPayment = method">
+                            <span class="payment-icon">
+                                <span *ngIf="method === 'Credit Card'">💳</span>
+                                <span *ngIf="method === 'Debit Card'">🏧</span>
+                                <span *ngIf="method === 'Cash on Delivery'">💵</span>
+                                <span *ngIf="method === 'Bank Transfer'">🏦</span>
+                            </span>
+                            <span>{{ method }}</span>
+                            <span class="check" *ngIf="selectedPayment === method">✓</span>
+                        </div>
+                    </div>
+                    <button class="place-order-btn" (click)="placeOrder()" [disabled]="placingOrder">
+                        {{ placingOrder ? 'Placing Order...' : 'Place Order' }}
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Right — Summary -->
+            <div class="cart-right">
+                <div class="price-summary">
+                    <h3>Price Details</h3>
+                    <div class="summary-row">
+                        <span>Price ({{ totalItems }} items)</span>
+                        <span>₹{{ totalAmount | number }}</span>
+                    </div>
+                    <div class="summary-row discount">
+                        <span>Discount</span>
+                        <span>− ₹{{ totalAmount * 0.15 | number:'1.0-0' }}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Charges</span>
+                        <span class="free">Free</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-row total">
+                        <span>Total Amount</span>
+                        <span>₹{{ totalAmount * 0.85 | number:'1.0-0' }}</span>
+                    </div>
+                    <p class="savings-msg">
+                        You will save ₹{{ totalAmount * 0.15 | number:'1.0-0' }} on this order
+                    </p>
+                    <button class="checkout-btn" (click)="proceedToCheckout()" *ngIf="!showCheckout">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

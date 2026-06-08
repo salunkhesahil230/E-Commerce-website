@@ -1,0 +1,64 @@
+<div class="orders-page">
+    <div class="orders-container">
+
+        <div class="page-header">
+            <h1>My Orders</h1>
+        </div>
+
+        <!-- Loading -->
+        <div class="loading-wrap" *ngIf="loading">
+            <div class="spinner"></div>
+        </div>
+
+        <!-- Empty -->
+        <div class="empty-orders" *ngIf="!loading && orders.length === 0">
+            <div class="empty-icon">📦</div>
+            <h2>No orders yet!</h2>
+            <p>You have not placed any orders yet.</p>
+            <button class="shop-btn" (click)="goToHome()">Start Shopping</button>
+        </div>
+
+        <!-- Orders List -->
+        <div class="orders-list" *ngIf="!loading && orders.length > 0">
+            <div class="order-card" *ngFor="let order of orders" (click)="viewOrder(order.id)">
+
+                <div class="order-header">
+                    <div class="order-info">
+                        <span class="order-id">Order #{{ order.id }}</span>
+                        <span class="order-date">
+                            {{ order.createdAt | date:'dd MMM yyyy, hh:mm a' }}
+                        </span>
+                    </div>
+                    <span class="order-status" [ngClass]="getStatusClass(order.status)">
+                        {{ order.status | titlecase }}
+                    </span>
+                </div>
+
+                <div class="order-items-preview">
+                    <div class="preview-item" *ngFor="let item of order.items.slice(0, 3)">
+                        <span class="preview-name">{{ item.product?.name }}</span>
+                        <span class="preview-qty">x{{ item.quantity }}</span>
+                        <span class="preview-price">₹{{ item.priceAtPurchase | number }}</span>
+                    </div>
+                    <p class="more-items" *ngIf="order.items.length > 3">
+                        + {{ order.items.length - 3 }} more items
+                    </p>
+                </div>
+
+                <div class="order-footer">
+                    <div class="order-payment">
+                        <span class="payment-label">Payment:</span>
+                        <span class="payment-value">{{ order.paymentMethod }}</span>
+                    </div>
+                    <div class="order-total">
+                        <span>Total:</span>
+                        <span class="total-amount">₹{{ order.totalAmount | number }}</span>
+                    </div>
+                    <button class="view-btn">View Details →</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

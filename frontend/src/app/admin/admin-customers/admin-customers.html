@@ -1,0 +1,49 @@
+<div class="admin-page">
+  <div class="page-header">
+    <h1>Manage Customers</h1>
+    <p>{{ customers.length }} customers registered</p>
+  </div>
+
+  <div class="success-box" *ngIf="successMsg">{{ successMsg }}</div>
+  <div class="error-box" *ngIf="errorMsg">{{ errorMsg }}</div>
+
+  <div class="table-wrap">
+    <div class="loading-wrap" *ngIf="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <table class="data-table" *ngIf="!loading">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Joined</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers">
+          <td>
+            <div class="customer-name">
+              <div class="avatar">{{ customer.name.charAt(0).toUpperCase() }}</div>
+              {{ customer.name }}
+            </div>
+          </td>
+          <td>{{ customer.email }}</td>
+          <td>{{ customer.createdAt | date:'dd MMM yyyy' }}</td>
+          <td>
+            <span class="status-badge" [class.locked]="customer.isLocked">
+              {{ customer.isLocked ? '🔒 Locked' : '✓ Active' }}
+            </span>
+          </td>
+          <td>
+            <button class="lock-btn" [class.unlock]="customer.isLocked" (click)="toggleLock(customer)">
+              {{ customer.isLocked ? 'Unlock' : 'Lock' }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
